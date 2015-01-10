@@ -15,21 +15,21 @@ namespace com {
                 class MonthYear {
 
                 private:
-                    int month;
-                    int yr;
+                    int _month;
+                    int _yr;
 
-                    Year year;
+                    Year _year;
 
                 public:
-                    MonthYear(int m, int y) : month(m), yr(y), year(Year(yr)) {
+                    MonthYear(int m, int y) : _month(m), _yr(y), _year(Year(_yr)) {
 
                     }
 
                     inline int getDaysInMonth() {
-                        if (year.isLeapYear())
-                            return leapdays[month - 1];
+                        if (_year.isLeapYear())
+                            return leapdays[_month - 1];
                         else
-                            return days[month - 1];
+                            return days[_month - 1];
 
                     }
                 };
