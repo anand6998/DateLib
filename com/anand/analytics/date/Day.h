@@ -40,12 +40,12 @@ namespace com {
                     }
 
                 private:
-                    int compute(int inputD, int inputM, int inputY ) {
-                        int a = (14 - inputM) / 12;
-                        int y = inputY + 4800 - a;
-                        int m = inputM + 12 * a - 3;
+                    int compute(int _d, int _m, int _y) {
+                        int a = (14 - _m) / 12;
+                        int y = _y + 4800 - a;
+                        int m = _m + 12 * a - 3;
 
-                        int value = inputD + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+                        int value = _d + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
                         //this->_jdn = value;
                         return value;
                     }
