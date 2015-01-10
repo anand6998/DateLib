@@ -19,7 +19,7 @@ int main() {
             Clock::local_time()
     );
 
-    int year = 2016;
+    int year = 2017;
 
     Calculator mlkDayCalc (DayofWeek::MON, 1, 3, false);
     Calculator presidentsDayCalc (DayofWeek::MON, 2, 3, false);
