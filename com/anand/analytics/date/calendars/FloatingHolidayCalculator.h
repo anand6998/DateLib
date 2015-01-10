@@ -28,7 +28,7 @@ namespace com {
                                 Day lastDay(year, month, monthYear.getDaysInMonth());
 
                                 while(lastDay.getDayOfWeek() != dayofWeek)
-                                    lastDay -= 1;
+                                    lastDay--;
 
                                 return lastDay;
                             } else {
@@ -38,7 +38,7 @@ namespace com {
 
                                 day += (weeksToAdd * 7);
                                 while (day.getDayOfWeek() != dayofWeek) {
-                                    day += 1;
+                                    day++;
                                 }
                                 return day;
                             }

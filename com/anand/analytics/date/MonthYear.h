@@ -15,10 +15,8 @@ namespace com {
                     int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
                     int leapdays[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
                 public:
-                    MonthYear(int m, int y)  {
-                        month = m;
-                        yr = y;
-                        year = Year(yr);
+                    MonthYear(int m, int y) : month(m), yr(y), year(Year(yr)) {
+
                     }
 
                     int getDaysInMonth() {

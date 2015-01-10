@@ -20,13 +20,6 @@ namespace com {
 
                     bool leap;
                 public:
-                    Year() {
-                        Day d;
-                        stDay = d;
-                        endDay = Day(d.getYear(), 12, 31);
-                        leap = isLeapYear();
-                    }
-
                     Year(int yr)  {
                         _thisyear = yr;
                         int d1 = 1;

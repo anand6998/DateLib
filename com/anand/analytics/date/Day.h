@@ -195,6 +195,28 @@ namespace com {
                         return *this;
                     }
 
+
+                    /**
+                    * Postfix
+                    */
+                    inline Day operator--(int) {
+                        Day currDay(jdn);
+                        --jdn;
+                        Day d(jdn);
+                        *this = d;
+                        return currDay;
+                    }
+
+                    /**
+                    * Prefix
+                    */
+                    inline Day operator--() {
+                        --jdn;
+                        Day d(jdn);
+                        *this = d;
+                        return *this;
+                    }
+
                     inline Day operator += (int days) {
                         jdn += days;
                         Day d(jdn);
