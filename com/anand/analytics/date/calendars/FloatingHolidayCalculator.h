@@ -12,32 +12,33 @@ namespace com {
                 namespace calendars {
                     class FloatingHolidayCalculator {
                     private:
-                        DayofWeek dayofWeek;
-                        int month;
-                        int numWeeks;
-                        bool last;
+                        DayofWeek _dayofWeek;
+                        int _month;
+                        int _numWeeks;
+                        bool _last;
                     public:
-                        FloatingHolidayCalculator(DayofWeek dow, int m, int nw, bool l) : dayofWeek(dow), month (m), numWeeks (nw), last(l) {
+                        FloatingHolidayCalculator(DayofWeek dow, int m, int nw, bool l)
+                                : _dayofWeek(dow), _month (m), _numWeeks (nw), _last(l) {
 
                         }
 
                         Day get(int year) {
-                            if (last) {
+                            if (_last) {
                                 using namespace com::anand::analytics::date;
-                                MonthYear monthYear(month, year);
-                                Day lastDay(year, month, monthYear.getDaysInMonth());
+                                MonthYear monthYear(_month, year);
+                                Day lastDay(year, _month, monthYear.getDaysInMonth());
 
-                                while(lastDay.getDayOfWeek() != dayofWeek)
+                                while(lastDay.getDayOfWeek() != _dayofWeek)
                                     lastDay--;
 
                                 return lastDay;
                             } else {
                                 //find the 1st day of the month
-                                Day day(year, month, 1);
-                                int weeksToAdd = numWeeks - 1;
+                                Day day(year, _month, 1);
+                                int weeksToAdd = _numWeeks - 1;
 
                                 day += (weeksToAdd * 7);
-                                while (day.getDayOfWeek() != dayofWeek) {
+                                while (day.getDayOfWeek() != _dayofWeek) {
                                     day++;
                                 }
                                 return day;
