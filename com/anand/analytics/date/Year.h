@@ -35,7 +35,7 @@ namespace com {
 
                     }
 
-                    bool isLeapYear() {
+                    inline bool isLeapYear() {
                         bool ret = false;
                         if (_thisyear % 4 == 0) {
                             ret = true;
@@ -50,15 +50,15 @@ namespace com {
                         return ret;
                     }
 
-                    Day startDate() {
+                    inline Day startDate() {
                         return stDay;
                     }
 
-                    Day endDate() {
+                    inline Day endDate() {
                         return endDay;
                     }
 
-                    bool isLeap() {
+                    inline bool isLeap() {
                         return leap;
                     }
 

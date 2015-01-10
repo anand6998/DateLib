@@ -25,7 +25,7 @@ namespace com {
 
                     }
 
-                    int getDaysInMonth() {
+                    inline int getDaysInMonth() {
                         if (year.isLeapYear())
                             return leapdays[month - 1];
                         else
