@@ -15,10 +15,9 @@ namespace com {
                 private:
                     Day _startDay;
                     Day _endDay;
-
                     int _year;
-
                     bool _leap;
+
                 public:
                     Year(int yr)  {
                         _year = yr;
