@@ -56,7 +56,9 @@ namespace com {
                     }
 
                     DayofWeek computeDayOfWeek(int jdn) {
-                        return static_cast<DayofWeek>((jdn + 1) % 7);
+                        int iDow = (jdn + 1) % 7;
+                        DayofWeek dow = static_cast<DayofWeek> (iDow);
+                        return dow;
                     }
 
                 public:
@@ -87,25 +89,34 @@ namespace com {
                         dayofWeek = other.dayofWeek;
                     }
 
-                    Day(int julian) {
-                        int i, j, k, l, n;
+                    Day(int J) {
 
-                        l = julian + 68569;
-                        n = 4 * l / 146097;
-                        l = l - (146097 * n + 3) / 4;
-                        i = (4000 * (l + 1)) / 1461001;
-                        l = l - (1461 * i) / 4 + 31;
-                        j = (80 * l) / 2447;
-                        k = l - (int) ((2447 * j) / 80);
-                        l = j / 11;
-                        j = j + 2 - (12 * l);
-                        i = 100 * (n - 49) + i + l;
+                        int y = 4716;
+                        int j = 1401;
+                        int m = 2;
+                        int n = 12;
+                        int r = 4;
+                        int p = 1461;
+                        int v = 3;
+                        int u = 5;
+                        int s = 153;
+                        int w = 2;
+                        int B = 274277;
+                        int C = -38;
 
-                        year = i;
-                        monthOfYear = j;
-                        dayOfMonth = k;
+                        int f = J + j + (((4 * J + B) / 146097) * 3) / 4 + C;
+                        int e = r * f + v;
+                        int g = (e % p) / r;
+                        int h = u * g + w;
 
-                        jdn = julian;
+                        int D = (h % s) / u + 1;
+                        int M = (h / s + m) % n + 1;
+                        int Y = (e / p ) - y + ( n + m - M ) / n;
+
+                        dayOfMonth = D;
+                        monthOfYear = M;
+                        year = Y;
+                        jdn = J;
                         dayofWeek = computeDayOfWeek(jdn);
                     }
 
