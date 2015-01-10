@@ -120,7 +120,7 @@ namespace com {
                         dayofWeek = computeDayOfWeek(jdn);
                     }
 
-                    Day &operator=(const Day &other) {
+                    Day& operator=(const Day &other) {
                         dayOfMonth = other.dayOfMonth;
                         monthOfYear = other.monthOfYear;
                         year = other.year;
@@ -130,7 +130,7 @@ namespace com {
                         return *this;
                     }
 
-                    friend ostream &operator<<(ostream &output,
+                    friend ostream& operator<<(ostream &output,
                             const Day &day) {
                         std::string strDay = boost::lexical_cast<std::string>(day.dayOfMonth);
                         if (day.dayOfMonth < 10)

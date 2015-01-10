@@ -17,7 +17,7 @@ int main() {
     );
 
     typedef com::anand::analytics::date::DayofWeek DayofWeek;
-    int year = 2015;
+    int year = 2016;
     typedef com::anand::analytics::date::calendars::FloatingHolidayCalculator Calculator;
 
     Calculator mlkDayCalc (DayofWeek::MON, 1, 3, false);
