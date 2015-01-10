@@ -10,15 +10,19 @@
 using namespace std;
 
 int main() {
+    typedef com::anand::analytics::date::calendars::FloatingHolidayCalculator Calculator;
+    typedef com::anand::analytics::date::DayofWeek DayofWeek;
+    typedef boost::posix_time::ptime PTime;
+    typedef boost::posix_time::microsec_clock Clock;
+    typedef boost::posix_time::time_duration TimeDuration;
 
-    using namespace boost::posix_time;
-    ptime time_start(
-            microsec_clock::local_time()
+    PTime time_start(
+            Clock::local_time()
     );
 
-    typedef com::anand::analytics::date::DayofWeek DayofWeek;
+
     int year = 2016;
-    typedef com::anand::analytics::date::calendars::FloatingHolidayCalculator Calculator;
+
 
     Calculator mlkDayCalc (DayofWeek::MON, 1, 3, false);
     Calculator presidentsDayCalc (DayofWeek::MON, 2, 3, false);
@@ -41,10 +45,11 @@ int main() {
         std::cout << it->get(year) << std::endl;
     }
 
-    ptime time_end(
-            microsec_clock::local_time()
+    PTime time_end(
+            Clock::local_time()
     );
-    time_duration duration (time_end - time_start);
+
+    TimeDuration duration (time_end - time_start);
     std::cout << duration << std::endl;
 
     return 0;
