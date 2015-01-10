@@ -15,33 +15,28 @@ namespace com {
             namespace date {
                 class Day {
                 private:
-                    int dayOfMonth;
-                    int monthOfYear;
-                    int year;
-
-                    bool isLeap;
-                    int jdn;
-                    DayofWeek dayofWeek;
+                    int _dayOfMonth;
+                    int _monthOfYear;
+                    int _year;
+                    
+                    int _jdn;
+                    DayofWeek _dayOfWeek;
 
                 public:
-                    int getDayOfMonth() const {
-                        return dayOfMonth;
+                    int get_dayOfMonth() const {
+                        return _dayOfMonth;
                     }
 
-                    int getMonthOfYear() const {
-                        return monthOfYear;
+                    int get_monthOfYear() const {
+                        return _monthOfYear;
                     }
 
                     int getYear() const {
-                        return year;
+                        return _year;
                     }
-
-                    bool isIsLeap() const {
-                        return isLeap;
-                    }
-
+                    
                     DayofWeek getDayOfWeek() {
-                        return dayofWeek;
+                        return _dayOfWeek;
                     }
 
                 private:
@@ -51,12 +46,12 @@ namespace com {
                         int m = inputM + 12 * a - 3;
 
                         int value = inputD + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
-                        //this->jdn = value;
+                        //this->_jdn = value;
                         return value;
                     }
 
-                    DayofWeek computeDayOfWeek(int jdn) {
-                        int iDow = (jdn + 1) % 7;
+                    DayofWeek computeDayOfWeek(int _jdn) {
+                        int iDow = (_jdn + 1) % 7;
                         DayofWeek dow = static_cast<DayofWeek> (iDow);
                         return dow;
                     }
@@ -68,25 +63,25 @@ namespace com {
                                 boost::gregorian::day_clock::local_day()
                         );
 
-                        dayOfMonth = d.day();
-                        monthOfYear = d.month();
-                        year = d.year();
+                        _dayOfMonth = d.day();
+                        _monthOfYear = d.month();
+                        _year = d.year();
 
-                        jdn = compute(dayOfMonth, monthOfYear, year);
-                        dayofWeek = computeDayOfWeek(jdn);
+                        _jdn = compute(_dayOfMonth, _monthOfYear, _year);
+                        _dayOfWeek = computeDayOfWeek(_jdn);
                     }
 
-                    Day(int y, int m, int d) : dayOfMonth(d), monthOfYear(m), year(y) {
-                        jdn = compute(dayOfMonth, monthOfYear, year);
-                        dayofWeek = computeDayOfWeek(jdn);
+                    Day(int y, int m, int d) : _dayOfMonth(d), _monthOfYear(m), _year(y) {
+                        _jdn = compute(_dayOfMonth, _monthOfYear, _year);
+                        _dayOfWeek = computeDayOfWeek(_jdn);
                     }
 
                     Day(const Day &other) {
-                        dayOfMonth = other.dayOfMonth;
-                        monthOfYear = other.monthOfYear;
-                        year = other.year;
-                        jdn = other.jdn;
-                        dayofWeek = other.dayofWeek;
+                        _dayOfMonth = other._dayOfMonth;
+                        _monthOfYear = other._monthOfYear;
+                        _year = other._year;
+                        _jdn = other._jdn;
+                        _dayOfWeek = other._dayOfWeek;
                     }
 
                     Day(int J) {
@@ -113,75 +108,75 @@ namespace com {
                         int M = (h / s + m) % n + 1;
                         int Y = (e / p ) - y + ( n + m - M ) / n;
 
-                        dayOfMonth = D;
-                        monthOfYear = M;
-                        year = Y;
-                        jdn = J;
-                        dayofWeek = computeDayOfWeek(jdn);
+                        _dayOfMonth = D;
+                        _monthOfYear = M;
+                        _year = Y;
+                        _jdn = J;
+                        _dayOfWeek = computeDayOfWeek(_jdn);
                     }
 
                     Day& operator=(const Day &other) {
-                        dayOfMonth = other.dayOfMonth;
-                        monthOfYear = other.monthOfYear;
-                        year = other.year;
+                        _dayOfMonth = other._dayOfMonth;
+                        _monthOfYear = other._monthOfYear;
+                        _year = other._year;
 
-                        jdn = other.jdn;
-                        dayofWeek = other.dayofWeek;
+                        _jdn = other._jdn;
+                        _dayOfWeek = other._dayOfWeek;
                         return *this;
                     }
 
                     friend ostream& operator<<(ostream &output,
                             const Day &day) {
-                        std::string strDay = boost::lexical_cast<std::string>(day.dayOfMonth);
-                        if (day.dayOfMonth < 10)
+                        std::string strDay = boost::lexical_cast<std::string>(day._dayOfMonth);
+                        if (day._dayOfMonth < 10)
                             strDay = "0" + strDay;
-                        std::string strMonth = boost::lexical_cast<std::string>(day.monthOfYear);
-                        if (day.monthOfYear < 10)
+                        std::string strMonth = boost::lexical_cast<std::string>(day._monthOfYear);
+                        if (day._monthOfYear < 10)
                             strMonth = "0" + strMonth;
-                        std::string strYr = boost::lexical_cast<std::string>(day.year);
+                        std::string strYr = boost::lexical_cast<std::string>(day._year);
                         std::string outStr = strYr + "-" + strMonth + "-" + strDay;
                         output << outStr;
                         return output;
                     }
 
                     inline bool operator==(const Day &other) {
-                        return this->jdn == other.jdn;
+                        return this->_jdn == other._jdn;
                     }
 
                     inline bool operator!=(const Day &other) {
-                        return this->jdn != other.jdn;
+                        return this->_jdn != other._jdn;
                     }
 
                     inline bool operator<(const Day &other) {
-                        return this->jdn < other.jdn ? true : false;
+                        return this->_jdn < other._jdn ? true : false;
                     }
 
                     inline bool operator<=(const Day &other) {
-                        return this->jdn <= other.jdn ? true : false;
+                        return this->_jdn <= other._jdn ? true : false;
                     }
 
                     inline bool operator>(const Day &other) {
-                        return this->jdn > other.jdn ? true : false;
+                        return this->_jdn > other._jdn ? true : false;
                     }
 
                     inline bool operator>=(const Day &other) {
-                        return this->jdn >= other.jdn ? true : false;
+                        return this->_jdn >= other._jdn ? true : false;
                     }
 
                     inline Day operator+(int numDays) {
-                        int jdnAdj = jdn + numDays;
+                        int jdnAdj = _jdn + numDays;
                         Day d(jdnAdj);
                         return d;
                     }
 
                     inline Day operator-(int numDays) {
-                        int jdnAdj = jdn - numDays;
+                        int jdnAdj = _jdn - numDays;
                         Day d(jdnAdj);
                         return d;
                     }
 
                     inline int operator-(const Day &other) {
-                        int diff = jdn - other.jdn;
+                        int diff = _jdn - other._jdn;
                         return diff;
                     }
 
@@ -189,9 +184,9 @@ namespace com {
                     * Postfix
                     */
                     inline Day operator++(int) {
-                        Day currDay(jdn);
-                        jdn++;
-                        Day d(jdn);
+                        Day currDay(_jdn);
+                        _jdn++;
+                        Day d(_jdn);
                         *this = d;
                         return currDay;
                     }
@@ -200,8 +195,8 @@ namespace com {
                     * Prefix
                     */
                     inline Day operator++() {
-                        jdn++;
-                        Day d(jdn);
+                        _jdn++;
+                        Day d(_jdn);
                         *this = d;
                         return *this;
                     }
@@ -211,9 +206,9 @@ namespace com {
                     * Postfix
                     */
                     inline Day operator--(int) {
-                        Day currDay(jdn);
-                        --jdn;
-                        Day d(jdn);
+                        Day currDay(_jdn);
+                        --_jdn;
+                        Day d(_jdn);
                         *this = d;
                         return currDay;
                     }
@@ -222,22 +217,22 @@ namespace com {
                     * Prefix
                     */
                     inline Day operator--() {
-                        --jdn;
-                        Day d(jdn);
+                        --_jdn;
+                        Day d(_jdn);
                         *this = d;
                         return *this;
                     }
 
                     inline Day operator += (int days) {
-                        jdn += days;
-                        Day d(jdn);
+                        _jdn += days;
+                        Day d(_jdn);
                         *this = d;
                         return *this;
                     }
 
                     inline Day operator -= (int days) {
-                        jdn -= days;
-                        Day d(jdn);
+                        _jdn -= days;
+                        Day d(_jdn);
                         *this = d;
                         return *this;
                     }

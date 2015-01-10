@@ -13,35 +13,35 @@ namespace com {
             namespace date {
                 class Year : public DateRange {
                 private:
-                    Day stDay;
-                    Day endDay;
+                    Day _startDay;
+                    Day _endDay;
 
-                    int _thisyear;
+                    int _year;
 
-                    bool leap;
+                    bool _leap;
                 public:
                     Year(int yr)  {
-                        _thisyear = yr;
+                        _year = yr;
                         int d1 = 1;
                         int d2 = 31;
 
                         int m1 = 1;
                         int m2 = 12;
 
-                        stDay = Day(_thisyear, m1, d1);
-                        endDay = Day(_thisyear, m2, d2);
+                        _startDay = Day(_year, m1, d1);
+                        _endDay = Day(_year, m2, d2);
 
-                        leap = isLeapYear();
+                        _leap = isLeapYear();
 
                     }
 
                     inline bool isLeapYear() {
                         bool ret = false;
-                        if (_thisyear % 4 == 0) {
+                        if (_year % 4 == 0) {
                             ret = true;
                         }
-                        if (_thisyear % 100 == 0) {
-                            if (_thisyear % 400 == 0)
+                        if (_year % 100 == 0) {
+                            if (_year % 400 == 0)
                                 ret = true;
                             else
                                 ret = false;
@@ -51,15 +51,15 @@ namespace com {
                     }
 
                     inline Day startDate() {
-                        return stDay;
+                        return _startDay;
                     }
 
                     inline Day endDate() {
-                        return endDay;
+                        return _endDay;
                     }
 
                     inline bool isLeap() {
-                        return leap;
+                        return _leap;
                     }
 
                     friend ostream &operator<<(ostream &output,
@@ -69,13 +69,13 @@ namespace com {
                     }
 
                     inline Year operator+(int yrs) {
-                        yrs += _thisyear;
+                        yrs += _year;
                         return Year(yrs);
                     }
 
                     inline Year operator+=(int yrs) {
-                        _thisyear += yrs;
-                        *this = Year(_thisyear);
+                        _year += yrs;
+                        *this = Year(_year);
                         return *this;
                     }
 
@@ -85,9 +85,9 @@ namespace com {
                     inline
                     Year
                     operator++(int) {
-                        Year currYear(_thisyear);
-                        _thisyear++;
-                        *this = Year(_thisyear);
+                        Year currYear(_year);
+                        _year++;
+                        *this = Year(_year);
                         return currYear;
                     }
 
@@ -97,8 +97,8 @@ namespace com {
                     inline
                     Year
                     operator++() {
-                        _thisyear++;
-                        *this = Year(_thisyear);
+                        _year++;
+                        *this = Year(_year);
                         return *this;
                     }
 
