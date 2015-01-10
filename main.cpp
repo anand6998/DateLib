@@ -10,12 +10,14 @@
 using namespace std;
 
 int main() {
-    int yr = 2000;
-    using namespace com::anand::analytics::date;
 
+    using namespace boost::posix_time;
+    ptime time_start(
+            microsec_clock::local_time()
+    );
 
+    typedef com::anand::analytics::date::DayofWeek DayofWeek;
     int year = 2015;
-    //Thanksgiving day
     typedef com::anand::analytics::date::calendars::FloatingHolidayCalculator Calculator;
 
     Calculator mlkDayCalc (DayofWeek::MON, 1, 3, false);
@@ -39,25 +41,11 @@ int main() {
         std::cout << it->get(year) << std::endl;
     }
 
-
-    /*
-    using namespace boost::posix_time;
-    ptime time_start(
-            microsec_clock::local_time()
-    );
-
-    for (int i = 0; i < 30000; i++) {
-        day++;
-
-    }
-
-    cout << day << endl;
-
     ptime time_end(
             microsec_clock::local_time()
     );
     time_duration duration (time_end - time_start);
     std::cout << duration << std::endl;
-    */
+
     return 0;
 }
